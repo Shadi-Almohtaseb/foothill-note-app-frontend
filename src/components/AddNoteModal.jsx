@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
-const AddNoteModal = ({ showNoteDetailsModal, openNoteDetailsModal }) => {
+const AddNoteModal = ({
+  showNoteDetailsModal,
+  openNoteDetailsModal,
+  addNote,
+}) => {
+  const [noteData, setNoteData] = useState({
+    title: "",
+    content: "",
+  });
+
+  const handleTitleChange = (e) => {
+    setNoteData({
+      ...noteData,
+      title: e.target.value,
+    });
+  };
+
+  const handleMessageChange = (e) => {
+    setNoteData({
+      ...noteData,
+      content: e.target.value,
+    });
+  };
+
+  const handelAddNote = () => {
+    addNote(noteData).then(showNoteDetailsModal);
+  };
+
   return (
     <div
       onClick={showNoteDetailsModal}
@@ -31,12 +58,12 @@ const AddNoteModal = ({ showNoteDetailsModal, openNoteDetailsModal }) => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 14 14"
+              stroke-width="1.5"
+              stroke="currentColor"
             >
               <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
               />
             </svg>
@@ -47,10 +74,12 @@ const AddNoteModal = ({ showNoteDetailsModal, openNoteDetailsModal }) => {
           <input
             type="text"
             placeholder="Title"
+            onChange={handleTitleChange}
             className="outline-none flex items-center w-full px-4 py-3 sm:pl-4 pl-2 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
           <textarea
             placeholder="Message"
+            onChange={handleMessageChange}
             rows="10"
             className="outline-none flex items-center w-full p-4 sm:pl-4 pl-2 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
@@ -59,6 +88,7 @@ const AddNoteModal = ({ showNoteDetailsModal, openNoteDetailsModal }) => {
           <button
             data-modal-hide="defaultModal"
             type="button"
+            onClick={handelAddNote}
             className="text-w-500 bg-blue-500 border-none hover:bg-blue-700 duration-200 text-white hover:bg-w-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-w-200 text-sm font-medium px-5 py-2.5 hover:text-w-900 focus:z-10 dark:bg-w-700 dark:text-w-300 dark:border-w-500 dark:hover:text-white dark:hover:bg-w-600 dark:focus:ring-w-600"
           >
             Add
