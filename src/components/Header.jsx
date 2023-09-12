@@ -46,13 +46,13 @@ const Header = () => {
           />
           <button
             type="submit"
-            className="text-white absolute sm:right-2.5 right-1 sm:bottom-2.5 bottom-1 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:px-4 sm:py-2 px-2 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white absolute sm:right-2.5 right-1.5 sm:bottom-2.5 bottom-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:px-4 sm:py-2 px-2 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             <span className="hidden sm:flex">Search</span>
             <img
               className="sm:hidden flex"
-              width="28"
-              height="28"
+              width="20"
+              height="20"
               src="https://img.icons8.com/windows/32/FFFFFF/search--v1.png"
               alt="search--v1"
             />

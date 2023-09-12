@@ -1,12 +1,23 @@
 import { useState } from "react";
 
 const useShowModal = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const showModal = () => {
-    setOpenModal(!openModal);
+  const [openNoteDetailsModal, setOpenNoteDetailsModal] = useState(false);
+  const [openAddNoteModal, setOpenAddNoteModal] = useState(false);
+
+  const showNoteDetailsModal = () => {
+    setOpenNoteDetailsModal(!openNoteDetailsModal);
   };
 
-  return { showModal, openModal, setOpenModal };
+  const showAddNoteModal = () => {
+    setOpenAddNoteModal(!openAddNoteModal);
+  };
+
+  return {
+    showNoteDetailsModal,
+    showAddNoteModal,
+    openNoteDetailsModal,
+    openAddNoteModal,
+  };
 };
 
 export { useShowModal };
