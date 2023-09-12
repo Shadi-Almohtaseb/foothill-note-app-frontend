@@ -15,7 +15,9 @@ const useThemeSettings = () => {
     document.documentElement.classList.toggle("dark", currentMode === "Dark");
   }, [currentMode]);
 
-  return { currentMode, toggleTheme };
+  const iconColor = currentMode === "Light" ? "4D4D4D" : "FFFFFF";
+
+  return { currentMode, toggleTheme, iconColor };
 };
 
 export { useThemeSettings };
