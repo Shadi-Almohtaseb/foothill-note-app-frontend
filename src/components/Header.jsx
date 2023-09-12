@@ -1,28 +1,20 @@
 import React from "react";
-// import ThemeToggle from "./ThemeToggle";
 import ThemeToggle from "../components/ThemeToggle";
 import { useThemeSettings } from "../hooks/useThemeSettings";
 
 const Header = () => {
-  const { currentMode, toggleTheme } = useThemeSettings();
+  const { currentMode, iconColor, toggleTheme } = useThemeSettings();
+
   return (
     <div className="flex items-center justify-between mx-5 py-2">
-      <div className="items-center gap-2 sm:flex hidden">
-        {currentMode === "Dark" ? (
-          <img
-            width="64"
-            height="64"
-            src="https://img.icons8.com/sf-black-filled/64/ffffff/note.png"
-            alt="note"
-          />
-        ) : (
-          <img
-            width="64"
-            height="64"
-            src="https://img.icons8.com/sf-black-filled/64/4D4D4D/note.png"
-            alt="note"
-          />
-        )}
+      <div className="items-center gap-2 sm:flex hidden cursor-pointer">
+        <img
+          width="64"
+          height="64"
+          src={`https://img.icons8.com/sf-black-filled/64/${iconColor}/note.png`}
+          alt="note"
+        />
+
         <span className="text-xl dark:text-white md:flex hidden">NoteApp</span>
       </div>
 
