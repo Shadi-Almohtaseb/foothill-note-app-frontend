@@ -2,7 +2,7 @@ import React from "react";
 import { useShowModal } from "../hooks/useShowModal";
 import NoteDetailsModal from "./NoteDetailsModal";
 
-const Note = ({ note }) => {
+const Note = ({ note, deleteNote, updateNote }) => {
   const { showNoteDetailsModal, openNoteDetailsModal } = useShowModal();
   return (
     <div className="w-[27rem] bg-[#ececec] dark:bg-gray-700 rounded-md px-5 py-4">
@@ -26,6 +26,9 @@ const Note = ({ note }) => {
       <NoteDetailsModal
         showNoteDetailsModal={showNoteDetailsModal}
         openNoteDetailsModal={openNoteDetailsModal}
+        note={note}
+        deleteNote={deleteNote}
+        updateNote={updateNote}
       />
 
       <p className="dark:text-white pb-3">{note.content}</p>

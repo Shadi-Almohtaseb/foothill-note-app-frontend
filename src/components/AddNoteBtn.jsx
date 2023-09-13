@@ -2,7 +2,7 @@ import React from "react";
 
 const AddNoteBtn = ({ showNoteDetailsModal }) => {
   return (
-    <div className="sm:mx-14 mx-5 mt-5 cursor-pointer">
+    <div className="sm:mx-14 mx-5 mt-5 cursor-pointer w-fit">
       <button
         onClick={showNoteDetailsModal}
         data-modal-target="defaultModal"
