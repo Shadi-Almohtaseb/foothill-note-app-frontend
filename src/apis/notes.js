@@ -34,3 +34,43 @@ export async function CreateNote(newNoteData) {
     throw new Error("Failed to create note");
   }
 }
+
+//DELETE a Note
+export async function DeleteNote(noteId) {
+  try {
+    return await fetch(`http://localhost:5000/notes/${noteId}`, {
+      method: "DELETE",
+    });
+  } catch (error) {
+    console.error("Failed to delete note:", error);
+    throw new Error("Failed to delete note");
+  }
+}
+
+//UPDATE a Note
+export async function UpdateNote(noteId, updatedDate) {
+  try {
+    return await fetch(`http://localhost:5000/notes/${noteId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedDate),
+    });
+  } catch (error) {
+    console.error("Failed to update note:", error);
+    throw new Error("Failed to update note");
+  }
+}
+
+//Search a Note
+export async function SearchNote(query) {
+  try {
+    return await fetch(`http://localhost:5000/notes?q=${query}`, {
+      method: "GET",
+    });
+  } catch (error) {
+    console.error("Failed to search note:", error);
+    throw new Error("Failed to search note");
+  }
+}

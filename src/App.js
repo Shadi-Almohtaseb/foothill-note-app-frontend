@@ -5,21 +5,46 @@ import Header from "./components/Header";
 import NotesContainer from "./components/NotesContainer";
 import { useNotes } from "./hooks/useDataFetching";
 import { useShowModal } from "./hooks/useShowModal";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-  const { addNote, notes, isLoading, error } = useNotes();
+  const {
+    addNote,
+    deleteNote,
+    updateNote,
+    searchNote,
+    notes,
+    isLoading,
+    error,
+  } = useNotes();
   const { showNoteDetailsModal, openNoteDetailsModal } = useShowModal();
   return (
+    // <BrowserRouter>
     <div className="dark:bg-[#1f2937] duration-200 h-full min-h-screen">
-      <Header />
+      <Header searchNote={searchNote} isLoading={isLoading} error={error} />
       <AddNoteBtn showNoteDetailsModal={showNoteDetailsModal} />
       <AddNoteModal
         showNoteDetailsModal={showNoteDetailsModal}
         openNoteDetailsModal={openNoteDetailsModal}
         addNote={addNote}
       />
-      <NotesContainer notes={notes} isLoading={isLoading} error={error} />
+      {/* <Routes> */}
+      {/* Default route */}
+      {/* <Route
+            path="/" */}
+      {/* element={ */}
+      <NotesContainer
+        notes={notes}
+        isLoading={isLoading}
+        error={error}
+        deleteNote={deleteNote}
+        updateNote={updateNote}
+      />
+      {/* }
+          /> */}
+      {/* </Routes> */}
     </div>
+    // </BrowserRouter>
   );
 }
 

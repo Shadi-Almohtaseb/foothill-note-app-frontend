@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import ThemeToggle from "../components/ThemeToggle";
 import { useThemeSettings } from "../hooks/useThemeSettings";
+// import { useSearchParams } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ searchNote, isLoading, error }) => {
   const { currentMode, iconColor, toggleTheme } = useThemeSettings();
+  // const [searchParam, setSearchParam] = useSearchParams();
+
+  const [searchParam, setSearchParam] = useState();
+
+  // const q = searchParam.get("q") || "";
+
+  const handelSearchNote = async (e) => {
+    e.preventDefault();
+    await searchNote(searchParam);
+  };
+
+  const handleInputChange = (e) => {
+    setSearchParam(e.target.value);
+    // if (q) {
+    //   setSearchParam({ q });
+    // } else {
+    //   setSearchParam({});
+    // }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="text-2xl flex items-center justify-center absolute top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.5)] transition-opacity">
+        Loading...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-2xl flex items-center justify-center absolute top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.5)] transition-opacity">
+        Error: {error.message}
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-between mx-5 py-2">
@@ -40,12 +76,14 @@ const Header = () => {
           <input
             type="search"
             id="default-search"
+            onChange={handleInputChange}
             className="outline-none flex items-center w-full p-4 sm:pl-10 pl-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search for notes.."
             required
           />
           <button
             type="submit"
+            onClick={handelSearchNote}
             className="text-white absolute sm:right-2.5 right-1.5 sm:bottom-2.5 bottom-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:px-4 sm:py-2 px-2 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             <span className="hidden sm:flex">Search</span>
