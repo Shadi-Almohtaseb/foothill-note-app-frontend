@@ -1,8 +1,11 @@
 //Get All Notes with pagination
-export async function GetNotes() {
+
+const deployedAPI = "https://foothillnoteapp-production.up.railway.app";
+
+export async function GetNotes(q) {
   try {
     const response = await fetch(
-      "http://localhost:5000/notes/get-all-notes?page=1&pageSize=1000"
+      `${deployedAPI}/notes/get-notes?q=${q || ""}&page=1&pageSize=1000`
     );
 
     if (!response.ok) {
@@ -22,7 +25,7 @@ export async function GetNotes() {
 //POST a new Note
 export async function CreateNote(newNoteData) {
   try {
-    return await fetch("http://localhost:5000/notes/create-note", {
+    return await fetch(`${deployedAPI}/notes/create-note`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +41,7 @@ export async function CreateNote(newNoteData) {
 //DELETE a Note
 export async function DeleteNote(noteId) {
   try {
-    return await fetch(`http://localhost:5000/notes/${noteId}`, {
+    return await fetch(`${deployedAPI}/notes/${noteId}`, {
       method: "DELETE",
     });
   } catch (error) {
@@ -50,7 +53,7 @@ export async function DeleteNote(noteId) {
 //UPDATE a Note
 export async function UpdateNote(noteId, updatedDate) {
   try {
-    return await fetch(`http://localhost:5000/notes/${noteId}`, {
+    return await fetch(`${deployedAPI}/notes/${noteId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +69,7 @@ export async function UpdateNote(noteId, updatedDate) {
 //Search a Note
 export async function SearchNote(query) {
   try {
-    return await fetch(`http://localhost:5000/notes?q=${query}`, {
+    return await fetch(`${deployedAPI}/notes?q=${query}`, {
       method: "GET",
     });
   } catch (error) {

@@ -12,9 +12,9 @@ export function useNotes() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchData = async () => {
+  const fetchData = async (searchParam) => {
     try {
-      const response = await GetNotes();
+      const response = await GetNotes(searchParam);
       setNotes(response.notes);
       setIsLoading(false);
     } catch (err) {
