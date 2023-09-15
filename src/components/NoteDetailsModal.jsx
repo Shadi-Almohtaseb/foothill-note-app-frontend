@@ -21,6 +21,7 @@ const NoteDetailsModal = ({
 
   const [title, setTitle] = useState(note.title);
   const [content, setContent] = useState(note.content);
+  console.log(content);
 
   return (
     <div

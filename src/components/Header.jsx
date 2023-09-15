@@ -1,29 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ThemeToggle from "../components/ThemeToggle";
 import { useThemeSettings } from "../hooks/useThemeSettings";
-// import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
-const Header = ({ searchNote, isLoading, error }) => {
+const Header = ({ searchNote, fetchData, isLoading, error }) => {
   const { currentMode, iconColor, toggleTheme } = useThemeSettings();
-  // const [searchParam, setSearchParam] = useSearchParams();
-
-  const [searchParam, setSearchParam] = useState();
-
-  // const q = searchParam.get("q") || "";
+  const [searchParam, setSearchParam] = useSearchParams();
 
   const handelSearchNote = async (e) => {
     e.preventDefault();
-    await searchNote(searchParam);
+    await fetchData(searchParam.get("q") || "");
   };
 
   const handleInputChange = (e) => {
-    setSearchParam(e.target.value);
-    // if (q) {
-    //   setSearchParam({ q });
-    // } else {
-    //   setSearchParam({});
-    // }
+    const q = e.target.value;
+    if (q) {
+      setSearchParam({ q }, q);
+    } else {
+      setSearchParam({});
+    }
   };
+
+  useEffect(() => {
+    const q = searchParam.get("q") || "";
+    setTimeout(() => {
+      fetchData(q);
+    }, 300);
+  }, []);
 
   if (isLoading) {
     return (
@@ -77,7 +80,8 @@ const Header = ({ searchNote, isLoading, error }) => {
             type="search"
             id="default-search"
             onChange={handleInputChange}
-            className="outline-none flex items-center w-full p-4 sm:pl-10 pl-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            value={searchParam.get("q") || ""}
+            className="outline-none flex items-center w-full p-4 sm:pl-10 pl-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search for notes.."
             required
           />

@@ -10,7 +10,7 @@ const NotesContainer = ({
 }) => {
   if (isLoading) {
     return (
-      <div className="text-2xl flex items-center justify-center absolute top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.5)] transition-opacity">
+      <div className="text-2xl flex items-center text-white justify-center absolute top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.5)] transition-opacity">
         Loading...
       </div>
     );
@@ -18,7 +18,7 @@ const NotesContainer = ({
 
   if (error) {
     return (
-      <div className="text-2xl flex items-center justify-center absolute top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.5)] transition-opacity">
+      <div className="text-2xl flex items-center text-white justify-center absolute top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.5)] transition-opacity">
         Error: {error.message}
       </div>
     );
