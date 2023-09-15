@@ -1,5 +1,3 @@
-//Get All Notes with pagination
-
 const deployedAPI = "https://foothillnoteapp-production.up.railway.app";
 
 export async function GetNotes(q) {
