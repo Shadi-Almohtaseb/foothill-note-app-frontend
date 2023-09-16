@@ -1,13 +1,14 @@
-const deployedAPI = "https://foothillnoteapp-production.up.railway.app";
+// const deployedAPI = "https://foothillnoteapp-production.up.railway.app";
+const localHost = "http://localhost:5000";
 
 export async function GetNotes(q) {
   try {
     const response = await fetch(
-      `${deployedAPI}/notes/get-notes?q=${q || ""}&page=1&pageSize=1000`
+      `${localHost}/notes/get-notes?q=${q || ""}&page=1&pageSize=1000`
     );
 
     if (!response.ok) {
-      const statusText = await response.statusText;
+      const statusText = response.statusText;
       console.error(`HTTP error! Status: ${response.status} - ${statusText}`);
       throw new Error("Network response was not ok");
     }
@@ -23,7 +24,7 @@ export async function GetNotes(q) {
 //POST a new Note
 export async function CreateNote(newNoteData) {
   try {
-    return await fetch(`${deployedAPI}/notes/create-note`, {
+    return await fetch(`${localHost}/notes/create-note`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +40,7 @@ export async function CreateNote(newNoteData) {
 //DELETE a Note
 export async function DeleteNote(noteId) {
   try {
-    return await fetch(`${deployedAPI}/notes/${noteId}`, {
+    return await fetch(`${localHost}/notes/${noteId}`, {
       method: "DELETE",
     });
   } catch (error) {
@@ -51,7 +52,7 @@ export async function DeleteNote(noteId) {
 //UPDATE a Note
 export async function UpdateNote(noteId, updatedDate) {
   try {
-    return await fetch(`${deployedAPI}/notes/${noteId}`, {
+    return await fetch(`${localHost}/notes/${noteId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +68,7 @@ export async function UpdateNote(noteId, updatedDate) {
 //Search a Note
 export async function SearchNote(query) {
   try {
-    return await fetch(`${deployedAPI}/notes?q=${query}`, {
+    return await fetch(`${localHost}/notes?q=${query}`, {
       method: "GET",
     });
   } catch (error) {
